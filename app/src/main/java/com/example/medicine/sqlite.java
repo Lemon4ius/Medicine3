@@ -42,11 +42,18 @@ public class sqlite extends SQLiteOpenHelper {
                 + KEY_DISCR + " text not null"
                 + ")");
 
+        db.execSQL("create table "+RegistrConst.SECONDTABLEUSERS+ "("
+                + RegistrConst.KEY_ID    + " integer primary key autoincrement,"
+                + RegistrConst.KEY_LOGIN  + " text not null unique,"
+                + RegistrConst.KEY_PASSWORD + " text not null unique"
+                + ")");
+
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("drop table if exists " + TABLE_NAME);
+        db.execSQL("drop table if exists " + RegistrConst.SECONDTABLEUSERS);
         onCreate(db);
     }
     Cursor readAllData() {
