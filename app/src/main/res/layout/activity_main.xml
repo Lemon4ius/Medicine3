@@ -8,28 +8,10 @@
     android:background="@android:color/holo_blue_light"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/buttonadd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="add"
-        app:layout_constraintBottom_toTopOf="@+id/activity_main_next"
-        app:layout_constraintEnd_toStartOf="@+id/Clear"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descr" />
 
-    <Button
-        android:id="@+id/buttonread"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="read"
-        app:layout_constraintBottom_toTopOf="@+id/activity_main_next"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descr"
-        app:layout_constraintStart_toEndOf="@id/Clear"/>
 
     <EditText
+        android:padding="10dp"
         android:background="@drawable/edit_text"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
@@ -45,6 +27,7 @@
        />
 
     <EditText
+        android:padding="10dp"
         android:id="@+id/price"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -59,6 +42,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
 
     <EditText
+        android:padding="10dp"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
         android:id="@+id/recept"
@@ -88,36 +72,58 @@
         app:layout_constraintTop_toBottomOf="@+id/recept" />
 
     <EditText
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
+        android:padding="10dp"
         android:id="@+id/descr"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
         android:background="@drawable/edit_text"
         android:text="discr"
-        app:layout_constraintBottom_toTopOf="@id/buttonadd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/image" />
+        app:layout_constraintTop_toBottomOf="@id/image"
+        app:layout_constraintBottom_toTopOf="@id/buttonadd"/>
+    <Button
+        android:id="@+id/buttonadd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/activity_main_next"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/descr"
+        tools:text = "add"
+/>
 
+    <Button
+        android:id="@+id/buttonread"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/buttonadd"
+        app:layout_constraintBottom_toTopOf="@id/activity_main_next"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/descr"
+        tools:text = "Read"
+       />
     <Button
         android:id="@+id/Clear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
-        app:layout_constraintBottom_toTopOf="@+id/activity_main_next"
-        app:layout_constraintStart_toEndOf="@id/buttonadd"
-        app:layout_constraintTop_toBottomOf="d"
-        app:layout_constraintEnd_toStartOf="@id/buttonread"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/buttonadd"
+        app:layout_constraintBottom_toTopOf="@id/activity_main_next"
+        app:layout_constraintTop_toBottomOf="@id/descr"
+        tools:text = "Clear"
+       />
 
     <Button
         android:id="@+id/activity_main_next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Переход на основную страницу"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        tools:text = "Enter"
+         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
