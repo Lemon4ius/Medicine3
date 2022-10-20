@@ -13,7 +13,7 @@ import androidx.annotation.Nullable;
 
 public class sqlite extends SQLiteOpenHelper {
     private Context context;
-    public  static final int DATABASE_VERSION=2;
+    public  static final int DATABASE_VERSION=4;
     public  static final String DATABASE_NAME="general";
     public  static final String TABLE_NAME="item";
 
@@ -28,6 +28,7 @@ public class sqlite extends SQLiteOpenHelper {
     public sqlite(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
+
     }
 
     @Override
@@ -44,9 +45,10 @@ public class sqlite extends SQLiteOpenHelper {
 
         db.execSQL("create table "+RegistrConst.SECONDTABLEUSERS+ "("
                 + RegistrConst.KEY_ID    + " integer primary key autoincrement,"
-                + RegistrConst.KEY_LOGIN  + " text not null unique,"
-                + RegistrConst.KEY_PASSWORD + " text not null unique"
+                + RegistrConst.KEY_LOGIN  + " text NOT NULL unique,"
+                + RegistrConst.KEY_PASSWORD + " text NOT NULL unique"
                 + ")");
+
 
     }
 

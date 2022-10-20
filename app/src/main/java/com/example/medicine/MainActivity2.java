@@ -24,7 +24,10 @@ public class MainActivity2 extends AppCompatActivity {
 
     HelpAdapter helpAdapter; // adapter
     sqlite SqliteObject;    //object sqlite
+    @Override
+    public void onBackPressed() {
 
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
