@@ -46,7 +46,8 @@ public class sqlite extends SQLiteOpenHelper {
         db.execSQL("create table "+RegistrConst.SECONDTABLEUSERS+ "("
                 + RegistrConst.KEY_ID    + " integer primary key autoincrement,"
                 + RegistrConst.KEY_LOGIN  + " text NOT NULL unique,"
-                + RegistrConst.KEY_PASSWORD + " text NOT NULL unique"
+                + RegistrConst.KEY_PASSWORD + " text NOT NULL unique,"
+                + RegistrConst.KEY_REG + " integer"
                 + ")");
 
 

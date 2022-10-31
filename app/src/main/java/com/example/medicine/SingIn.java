@@ -55,6 +55,7 @@ public class SingIn extends AppCompatActivity {
         String Password = regpass.getText().toString();
 //        Cursor cursor = liteDatabase.rawQuery("SELECT * FROM " + RegistrConst.SECONDTABLEUSERS+ " WHERE "+RegistrConst.KEY_ID,null);
 
+
         Cursor cursor = liteDatabase.query(RegistrConst.SECONDTABLEUSERS, null,null,
                 null,null,null,null);
 
