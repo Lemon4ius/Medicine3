@@ -42,48 +42,32 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
 
     <EditText
-        android:padding="10dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
         android:id="@+id/recept"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/edit_text"
-        android:text="recept"
-        app:layout_constraintBottom_toTopOf="@id/image"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/price" />
-
-    <EditText
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
-        android:id="@+id/image"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginBottom="20dp"
         android:background="@drawable/edit_text"
         android:padding="10dp"
-        android:text="image"
-        app:layout_constraintBottom_toTopOf="@id/descr"
+        android:text="recept"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recept" />
+        app:layout_constraintTop_toBottomOf="@+id/price"
+        app:layout_constraintBottom_toTopOf="@id/addimage"/>
 
     <EditText
-        android:padding="10dp"
         android:id="@+id/descr"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
         android:background="@drawable/edit_text"
+        android:padding="10dp"
         android:text="discr"
+        app:layout_constraintBottom_toTopOf="@id/buttonadd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/image"
-        app:layout_constraintBottom_toTopOf="@id/buttonadd"/>
+        app:layout_constraintTop_toBottomOf="@id/addimage"/>
     <Button
         android:id="@+id/buttonadd"
         android:layout_width="wrap_content"
@@ -92,8 +76,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/descr"
-        tools:text = "add"
+        android:text = "add"
 />
+    <Button
+        android:id="@+id/addimage"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/recept"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/descr"
+        android:text="Add image"
+        android:onClick="AddImage"/>
 
     <Button
         android:id="@+id/buttonread"
@@ -103,7 +97,7 @@
         app:layout_constraintBottom_toTopOf="@id/activity_main_next"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/descr"
-        tools:text = "Read"
+        android:text = "Read"
        />
     <Button
         android:id="@+id/Clear"
@@ -113,7 +107,7 @@
         app:layout_constraintEnd_toStartOf="@id/buttonadd"
         app:layout_constraintBottom_toTopOf="@id/activity_main_next"
         app:layout_constraintTop_toBottomOf="@id/descr"
-        tools:text = "Clear"
+        android:text = "Clear"
        />
 
     <Button
@@ -123,7 +117,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:text = "Enter"
+        android:text = "Enter"
          />
 
+    <ImageView
+        android:background="@color/black"
+        android:id="@+id/image_1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toTopOf="@+id/descr"
+        app:layout_constraintEnd_toStartOf="@+id/addimage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recept" />
 </androidx.constraintlayout.widget.ConstraintLayout>

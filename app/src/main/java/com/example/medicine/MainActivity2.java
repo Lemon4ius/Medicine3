@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -20,8 +21,8 @@ import java.util.List;
 public class MainActivity2 extends AppCompatActivity {
     private ArrayList<String> name, disc;
     ImageView image;
-    Button button_next;
 
+    SQLiteDatabase sqLiteDatabase;
     HelpAdapter helpAdapter; // adapter
     sqlite SqliteObject;    //object sqlite
     @Override
@@ -42,14 +43,14 @@ public class MainActivity2 extends AppCompatActivity {
         disc = new ArrayList<>();
         image = new ImageView(this);
 
-        displaydate();
 
+        displaydate();
         helpAdapter = new HelpAdapter(MainActivity2.this, name, disc);
         recyclerView.setAdapter(helpAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity2.this));
 
 
-        button_next = (Button) findViewById(R.id.activity_main_next);
+
 
 
     }
@@ -77,18 +78,6 @@ public class MainActivity2 extends AppCompatActivity {
     }
 
 
-}
-//    private Medicine generateNewMedicine() {
-//        return new Medicine("Новый фильм", "awdad", 0);
-//    }
 
-//    private List<Medicine> generateMedicineList() {
-//
-//        List<Medicine> medicine = new ArrayList<>();
-//        medicine.add(new Medicine("awd", sqlite.KEY_DISCR, R.drawable.azirak));
-//
-//
-//            return medicine;
-//
-//    }
+}
 

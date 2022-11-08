@@ -1,34 +1,53 @@
 package com.example.medicine;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.service.controls.Control;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.util.concurrent.ExecutionException;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+   //View
     EditText name;
     EditText price;
     EditText recept;
-    EditText image;
     EditText descreption;
-
 
     Button add;
     Button read;
     Button clear;
+    Button addimage;
 
+    ImageView image;
 
+//.................................................................................................
+
+    //Database
     sqlite Sqlite;
+    SQLiteDatabase database;
 
+
+
+    private static final int RQS_OPEN_IMAGE = 1;
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         name = (EditText) findViewById(R.id.editTextTextPersonName);
         price =(EditText) findViewById(R.id.price);
         recept =(EditText) findViewById(R.id.recept);
-        image =(EditText) findViewById(R.id.image);
+
         descreption =(EditText) findViewById(R.id.descr);
 
 
@@ -53,7 +72,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         clear=(Button)findViewById(R.id.Clear);
         clear.setOnClickListener(this);
 
+        addimage= (Button) findViewById(R.id.addimage);
+
+        image = (ImageView) findViewById(R.id.image_1);
+
         Sqlite=new sqlite(this);
+
+
+
 
 
         Button next=(Button) findViewById(R.id.activity_main_next);
@@ -73,22 +99,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
 
        String Name = name.getText().toString();
-       String Price = price.getText().toString() , Recept= recept.getText().toString();
-       String Image = image.getText().toString();
+       String Price = price.getText().toString();
+       String Recept= recept.getText().toString();
        String Descript = descreption.getText().toString();
 
-        SQLiteDatabase database = Sqlite.getWritableDatabase();
-
+       database = Sqlite.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
+
         switch (v.getId()){
 
             case R.id.buttonadd:
+
                 contentValues.put(sqlite.KEY_NAME,Name);
                 contentValues.put(sqlite.KEY_PRICE,Price);
+                contentValues.put(sqlite.KEY_IMAGE,path);
                 contentValues.put(sqlite.KEY_RECEPT,Recept);
-                contentValues.put(sqlite.KEY_IMAGE,Image);
                 contentValues.put(sqlite.KEY_DISCR,Descript);
-
                 database.insert(sqlite.TABLE_NAME, null, contentValues);
 
                 break;
@@ -101,14 +127,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                      int nameIndex = cursor.getColumnIndex(sqlite.KEY_NAME);
                      int priceIndex = cursor.getColumnIndex(sqlite.KEY_PRICE);
                      int receptIndex = cursor.getColumnIndex(sqlite.KEY_RECEPT);
-                     int imageIndex = cursor.getColumnIndex(sqlite.KEY_IMAGE);
                      int discrIndex = cursor.getColumnIndex(sqlite.KEY_DISCR);
                      do {
                          Log.d("mLog", "ID = " + cursor.getInt(idIndex)
                          + ", name = " + cursor.getString(nameIndex)
                          + ", price = " + cursor.getDouble(priceIndex)
                          + ", recept = " + cursor.getInt(receptIndex)
-                         + ", image = " + cursor.getString(imageIndex)
                          +  ", discription = " + cursor.getString(discrIndex));
                      }while (cursor.moveToNext());
 
@@ -123,6 +147,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Sqlite.close();
 
     }
+    String path;
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode==RQS_OPEN_IMAGE){
+                 path = data.getData().getPath();
+                 Uri uri = data.getData();
+                 try {
+                    InputStream inputStream = getBaseContext().getContentResolver().openInputStream(uri);
+                    Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                    image.setImageBitmap(bitmap);
+                 }
+                 catch (FileNotFoundException e) {
+                     e.printStackTrace();
+                 }
+
+            }
+        }
+    }
 
 
+    public void AddImage(View view) {
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("image/*");
+        startActivityForResult(intent, RQS_OPEN_IMAGE);
+    }
 }

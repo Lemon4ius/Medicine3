@@ -13,7 +13,7 @@ import androidx.annotation.Nullable;
 
 public class sqlite extends SQLiteOpenHelper {
     private Context context;
-    public  static final int DATABASE_VERSION=4;
+    public  static final int DATABASE_VERSION=5;
     public  static final String DATABASE_NAME="general";
     public  static final String TABLE_NAME="item";
 
@@ -39,7 +39,7 @@ public class sqlite extends SQLiteOpenHelper {
                 + KEY_NAME  + " text not null unique,"
                 + KEY_PRICE + " text not null,"
                 + KEY_RECEPT+ " integer not null, "
-                + KEY_IMAGE + " text not null,"
+                + KEY_IMAGE + " text,"
                 + KEY_DISCR + " text not null"
                 + ")");
 

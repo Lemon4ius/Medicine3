@@ -20,14 +20,13 @@ public class HelpAdapter extends RecyclerView.Adapter<HelpAdapter.MyViewHolder> 
     ArrayList  Name, disc ;
     ImageView imageView;
     HelpAdapter(Context context, ArrayList Name,ArrayList disc ){
+
         this.context = context;
         this.Name =Name;
-
         this.disc = disc;
 
-
-
     }
+
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
