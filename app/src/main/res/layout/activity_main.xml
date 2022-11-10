@@ -120,13 +120,4 @@
         android:text = "Enter"
          />
 
-    <ImageView
-        android:background="@color/black"
-        android:id="@+id/image_1"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        app:layout_constraintBottom_toTopOf="@+id/descr"
-        app:layout_constraintEnd_toStartOf="@+id/addimage"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recept" />
 </androidx.constraintlayout.widget.ConstraintLayout>

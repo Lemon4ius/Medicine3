@@ -1,8 +1,10 @@
 package com.example.medicine;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.ImageDecoder;
 import android.media.Image;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,13 +19,14 @@ import java.util.List;
 
 public class HelpAdapter extends RecyclerView.Adapter<HelpAdapter.MyViewHolder> {
     Context context;
-    ArrayList  Name, disc ;
-    ImageView imageView;
-    HelpAdapter(Context context, ArrayList Name,ArrayList disc ){
+    ArrayList  Name, disc, imageView ;
+    Medicine medicine;
+    HelpAdapter(Context context, ArrayList Name,ArrayList disc , ArrayList imageView){
 
         this.context = context;
         this.Name =Name;
         this.disc = disc;
+        this.imageView=imageView;
 
     }
 
@@ -39,6 +42,7 @@ public class HelpAdapter extends RecyclerView.Adapter<HelpAdapter.MyViewHolder> 
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.medicen_name_txt.setText(String.valueOf(Name.get(position)));
         holder.medicen_disc_txt.setText(String.valueOf(disc.get(position)));
+        holder.medicen_image.setImageBitmap((Bitmap) imageView.get(position) );
 
     }
 
