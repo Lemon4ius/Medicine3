@@ -1,18 +1,15 @@
 package com.example.medicine;
-
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.renderscript.Sampler;
-import android.widget.Toast;
+
 
 import androidx.annotation.Nullable;
 
 
 public class sqlite extends SQLiteOpenHelper {
-    private Context context;
+    private final Context context;
     public  static final int DATABASE_VERSION=5;
     public  static final String DATABASE_NAME="general";
     public  static final String TABLE_NAME="item";

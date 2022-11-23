@@ -9,9 +9,12 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteCursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import android.net.Uri;
+import android.net.ipsec.ike.exceptions.IkeNetworkLostException;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.util.Log;
@@ -30,6 +33,7 @@ public class Registrashion extends AppCompatActivity {
     EditText login, password;
     sqlite Object_sqlite;
     SQLiteDatabase sqLiteDatabase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,34 +47,44 @@ public class Registrashion extends AppCompatActivity {
         sqLiteDatabase = Object_sqlite.getWritableDatabase();
 
     }
-    public void AddReadDb(View v){
 
-        String Login = login.getText().toString();
-        String Password = password.getText().toString();
-        Login.replace(" ", "");
-        Password.replace(" ", "");
-        ContentValues contentValues  =new ContentValues();
+    public void AddReadDb(View v) {
+        if (login.getText().length() < 5)
+            Toast.makeText(this, "В логине должно быть не менее 5 символов", Toast.LENGTH_SHORT).show();
+        else if (password.getText().length() < 5)
+            Toast.makeText(this, "В пароле должно быть не менее 5 символов", Toast.LENGTH_SHORT).show();
+        else {
 
-        contentValues.put(RegistrConst.KEY_LOGIN, Login);
-        contentValues.put(RegistrConst.KEY_PASSWORD, Password);
-        sqLiteDatabase.insert(RegistrConst.SECONDTABLEUSERS,null,contentValues);
+            String Login = login.getText().toString();
+            String Password = password.getText().toString();
+            Login.replace(" ", "");
+            Password.replace(" ", "");
+            ContentValues contentValues = new ContentValues();
 
-        Cursor cursor = sqLiteDatabase.query(RegistrConst.SECONDTABLEUSERS,  null,
-                null,null,null,null,null);
-        int nameindex = cursor.getColumnIndex(RegistrConst.KEY_LOGIN);
-        int passindex = cursor.getColumnIndex(RegistrConst.KEY_PASSWORD);
-        int idindex =  cursor.getColumnIndex(RegistrConst.KEY_ID);
-        while (cursor.moveToNext()){
+            contentValues.put(RegistrConst.KEY_LOGIN, Login);
 
-            Log.d("tag ", "id:"+cursor.getString(idindex)
-                    +" Login - "+ cursor.getString(nameindex)
-                    + "Password -"  +  cursor.getString(passindex));
+            contentValues.put(RegistrConst.KEY_PASSWORD, Password);
+
+            Cursor cursor = sqLiteDatabase.query(RegistrConst.SECONDTABLEUSERS, null, null,
+                    null, null, null, null);
+            int Logind = cursor.getColumnIndex(RegistrConst.KEY_LOGIN);
+            int Passind = cursor.getColumnIndex(RegistrConst.KEY_PASSWORD);
+            while (cursor.moveToNext()) {
+                if (login.getText().toString().equals(cursor.getString(Logind))) {
+                    Toast.makeText(this, "Такой логин уже существует", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (password.getText().toString().equals(cursor.getString(Passind))) {
+                    Toast.makeText(this, "Такой пароль уже существует", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+
+            }
+            sqLiteDatabase.insert(RegistrConst.SECONDTABLEUSERS, null, contentValues);
+            Intent intent = new Intent(this, SingIn.class);
+            startActivity(intent);
 
         }
-        cursor.close();
-
-
-
     }
 
     @Override
@@ -85,18 +99,18 @@ public class Registrashion extends AppCompatActivity {
 
 
         List<String> lol = new ArrayList<>();
-        boolean log =false;
+        boolean log = false;
 
         String Login = login.getText().toString();
         String Password = password.getText().toString();
-        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM " + RegistrConst.SECONDTABLEUSERS+ " WHERE "+RegistrConst.KEY_ID,null);
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM " + RegistrConst.SECONDTABLEUSERS + " WHERE " + RegistrConst.KEY_ID, null);
 
         int nameindex = cursor.getColumnIndex(RegistrConst.KEY_LOGIN);
         int passindex = cursor.getColumnIndex(RegistrConst.KEY_PASSWORD);
-        int idindex =  cursor.getColumnIndex(RegistrConst.KEY_ID);
+        int idindex = cursor.getColumnIndex(RegistrConst.KEY_ID);
 
-        while (cursor.moveToNext()){
-            if (Login.equals(cursor.getString(nameindex)) && Password.equals(cursor.getString(passindex))){
+        while (cursor.moveToNext()) {
+            if (Login.equals(cursor.getString(nameindex)) && Password.equals(cursor.getString(passindex))) {
                 check.setBackgroundColor(000000);
 
 
@@ -104,7 +118,7 @@ public class Registrashion extends AppCompatActivity {
 
             lol.add(cursor.getString(nameindex));
             lol.add(cursor.getString(passindex));
-            for (String item : lol ) {
+            for (String item : lol) {
                 System.out.println(item);
             }
         }

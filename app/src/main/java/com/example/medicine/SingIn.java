@@ -17,6 +17,7 @@ import java.util.List;
 
 
 public class SingIn extends AppCompatActivity {
+    private static final int PERMISSION_STORAGE = 101;
     sqlite Object_Sqlite;
     SQLiteDatabase liteDatabase;
     EditText reglog, regpass;
@@ -29,6 +30,7 @@ public class SingIn extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sing_in);
         Object_Sqlite = new sqlite(this);
@@ -53,7 +55,7 @@ public class SingIn extends AppCompatActivity {
 
         String Login = reglog.getText().toString();
         String Password = regpass.getText().toString();
-//        Cursor cursor = liteDatabase.rawQuery("SELECT * FROM " + RegistrConst.SECONDTABLEUSERS+ " WHERE "+RegistrConst.KEY_ID,null);
+
 
 
         Cursor cursor = liteDatabase.query(RegistrConst.SECONDTABLEUSERS, null,null,
