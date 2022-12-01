@@ -26,15 +26,14 @@ import java.util.List;
 
 public class HelpAdapter extends RecyclerView.Adapter<HelpAdapter.MyViewHolder> {
     Context context;
-    ArrayList Name, disc;
+    ArrayList Name, price;
     ArrayList<String> imageView = new ArrayList<String>();
 
-    HelpAdapter(Context context, ArrayList Name, ArrayList disc, ArrayList imageView) {
-
+    HelpAdapter(Context context, ArrayList Name, ArrayList imageView, ArrayList price) {
         this.context = context;
         this.Name = Name;
-        this.disc = disc;
         this.imageView = imageView;
+        this.price = price;
 
     }
 
@@ -48,23 +47,15 @@ public class HelpAdapter extends RecyclerView.Adapter<HelpAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.medicen_name_txt.setText(String.valueOf(Name.get(position)));
-        holder.medicen_disc_txt.setText(String.valueOf(disc.get(position)));
-
+        holder.medidcine_price_txt.setText(String.valueOf(price.get(position)));
 
 
         Uri uri = Uri.parse(imageView.get(position));
         holder.medicen_image_txt.setImageURI(uri);
 
 
-
-
     }
-    private Bitmap Convettobitmap()
-    {
-        byte [] encodeByte = Base64.decode("android.graphics.Bitmap@828dec4",Base64.DEFAULT);
-        Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
-        return bitmap;
-    }
+
     private Context getBaseContext() {
         return context;
     }
@@ -78,16 +69,16 @@ public class HelpAdapter extends RecyclerView.Adapter<HelpAdapter.MyViewHolder> 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView medicen_name_txt, medicen_disc_txt;
+        TextView medicen_name_txt, medicen_disc_txt, medidcine_price_txt;
 
         ImageView medicen_image_txt;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-
+            medidcine_price_txt = itemView.findViewById(R.id.medicine_price);
             medicen_name_txt = itemView.findViewById(R.id.medicine_name);
             medicen_image_txt = itemView.findViewById(R.id.medicine_image);
-            medicen_disc_txt = itemView.findViewById(R.id.medicine_discription);
+
 
 
         }

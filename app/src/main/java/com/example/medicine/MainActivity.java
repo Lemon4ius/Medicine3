@@ -68,10 +68,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         add.setOnClickListener(this);
 
 
-        read = (Button) findViewById(R.id.buttonread);
-        read.setOnClickListener(this);
-
-
         clear = (Button) findViewById(R.id.Clear);
         clear.setOnClickListener(this);
 
@@ -120,7 +116,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     database.insert(sqlite.TABLE_NAME, null, contentValues);
 
                     break;
-                case R.id.buttonread:
 
                 case R.id.Clear:
                     database.delete(sqlite.TABLE_NAME, null, null);

@@ -2,7 +2,9 @@ package com.example.medicine;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -17,6 +19,10 @@ public class Registrashion extends AppCompatActivity {
     EditText login, password;
     sqlite Object_sqlite;
     SQLiteDatabase sqLiteDatabase;
+
+    Context context;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +57,9 @@ public class Registrashion extends AppCompatActivity {
                     null, null, null, null);
             int Logind = cursor.getColumnIndex(RegistrConst.KEY_LOGIN);
             int Passind = cursor.getColumnIndex(RegistrConst.KEY_PASSWORD);
+
+
+
             while (cursor.moveToNext()) {
                 if (login.getText().toString().equals(cursor.getString(Logind))) {
                     Toast.makeText(this, "Такой логин уже существует", Toast.LENGTH_SHORT).show();

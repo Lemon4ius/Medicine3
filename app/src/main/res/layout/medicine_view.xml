@@ -28,14 +28,14 @@
         android:paddingEnd="10dp"
         android:paddingRight="10dp"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@id/medicine_discription"
+        app:layout_constraintBottom_toBottomOf="@id/medicine_price"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/medicine_image"
         app:layout_constraintTop_toTopOf="@id/medicine_image"
         app:layout_constraintVertical_chainStyle="packed"
         tools:text="Name"/>
     <TextView
-        android:id="@+id/medicine_discription"
+        android:id="@+id/medicine_price"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ellipsize="end"

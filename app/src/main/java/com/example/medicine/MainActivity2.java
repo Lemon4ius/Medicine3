@@ -12,14 +12,20 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
 
 public class MainActivity2 extends AppCompatActivity {
-    private ArrayList<String> name, disc;
+    private ArrayList<String> name, disc, price;
     private ArrayList<String> image;
+
+
+    Spinner spinner;
+    String[] SortList = {"Сортировка по названию", "Сортировка по цене", "Сортировка по рецепту"};
 
 
     private static final int RQS_OPEN_IMAGE = 1;
@@ -28,10 +34,7 @@ public class MainActivity2 extends AppCompatActivity {
     HelpAdapter helpAdapter; // adapter
     sqlite SqliteObject;    //object sqlite
 
-    @Override
-    public void onBackPressed() {
 
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,13 +49,18 @@ public class MainActivity2 extends AppCompatActivity {
         name = new ArrayList<>();
         disc = new ArrayList<>();
         image = new ArrayList<>();
+        price= new ArrayList<>();
 
         displaydate();
-        helpAdapter = new HelpAdapter(MainActivity2.this, name, disc, image);
+        helpAdapter = new HelpAdapter(MainActivity2.this, name, image, price);
         recyclerView.setAdapter(helpAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity2.this));
 
 
+        spinner = (Spinner) findViewById(R.id.medicineSpiner);
+        ArrayAdapter<?> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, SortList);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(arrayAdapter);
     }
 
 
@@ -65,7 +73,7 @@ public class MainActivity2 extends AppCompatActivity {
 
                 image.add(cursor.getString(4));
                 name.add(cursor.getString(1));
-                disc.add(cursor.getString(5));
+                price.add(cursor.getString(2));
             }
         }
 
@@ -77,6 +85,9 @@ public class MainActivity2 extends AppCompatActivity {
         startActivity(intent2);
     }
 
+    @Override
+    public void onBackPressed() {
 
+    }
 }
 
