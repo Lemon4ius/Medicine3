@@ -92,7 +92,7 @@ public class SingIn extends AppCompatActivity {
                 editor.putString(KEY_SHP, String.valueOf(cursor.getString(passindex).hashCode()));
                 editor.apply();
                 contentValues.put(RegistrConst.KEY_REG, cursor.getString(passindex).hashCode());
-                liteDatabase.update(RegistrConst.SECONDTABLEUSERS, contentValues, RegistrConst.KEY_PASSWORD + " = " + Password, null);
+                //liteDatabase.update(RegistrConst.SECONDTABLEUSERS, contentValues, RegistrConst.KEY_PASSWORD + " = " + Password, null);
                 Intent intent = new Intent(SingIn.this, MainActivity2.class);
                 startActivity(intent);
 
