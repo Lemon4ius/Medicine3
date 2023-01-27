@@ -47,13 +47,9 @@ public class HelpAdapter extends RecyclerView.Adapter<HelpAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.medicen_name_txt.setText(String.valueOf(Name.get(position)));
-        holder.medidcine_price_txt.setText(String.valueOf(price.get(position)));
-
-
+        holder.medidcine_price_txt.setText(String.valueOf(price.get(position))+"р.б");
         Uri uri = Uri.parse(imageView.get(position));
         holder.medicen_image_txt.setImageURI(uri);
-
-
     }
 
     private Context getBaseContext() {

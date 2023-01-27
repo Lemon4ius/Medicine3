@@ -9,6 +9,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -41,7 +42,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button read;
     Button clear;
     Button addimage;
-
 
 
     //Database
@@ -92,11 +92,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
 
-        if (name.getText().length() == 0 || price.getText().length() == 0 || recept.getText().length() == 0 || descreption.getText().length() == 0||uri == null && uri.equals(Uri.EMPTY) ) {
+        if (name.getText().length() == 0 || price.getText().length() == 0 || recept.getText().length() == 0 || descreption.getText().length() == 0 || uri == null && uri.equals(Uri.EMPTY)) {
             Toast.makeText(this, "Заполните все данные", Toast.LENGTH_SHORT).show();
-        }
-
-        else {
+        } else {
             String Name = name.getText().toString();
             String Price = price.getText().toString();
             String Recept = recept.getText().toString();
@@ -114,7 +112,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     contentValues.put(sqlite.KEY_RECEPT, Recept);
                     contentValues.put(sqlite.KEY_DISCR, Descript);
                     database.insert(sqlite.TABLE_NAME, null, contentValues);
-
                     break;
 
                 case R.id.Clear:
@@ -126,6 +123,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     Uri uri = null;
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -145,7 +143,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             intent.setType("image/*");
             startActivityForResult(intent, RQS_OPEN_IMAGE);
 
-        } catch (Exception s) {
+        } catch (SQLException s) {
             Toast.makeText(this, "Выберите изображение", Toast.LENGTH_SHORT).show();
         }
 

@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 
 public class sqlite extends SQLiteOpenHelper {
     private final Context context;
-    public  static final int DATABASE_VERSION=6;
+    public  static final int DATABASE_VERSION=5;
     public  static final String DATABASE_NAME="general";
     public  static final String TABLE_NAME="item";
 
@@ -59,7 +59,7 @@ public class sqlite extends SQLiteOpenHelper {
     Cursor readAllData() {
         String qeury = "SELECT * FROM " + TABLE_NAME;
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = null;
+        Cursor cursor = db.query(sqlite.TABLE_NAME, null,null, null, null,null, sqlite.KEY_PRICE+ " ASC");
         if (db != null) {
             cursor = db.rawQuery(qeury, null);
         }
